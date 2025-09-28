@@ -1,0 +1,50 @@
+services:
+  postgres:
+    image: postgres:18-alpine
+    container_name: postgres
+    restart: always
+    expose:
+      - 5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: autha
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - database
+
+  meilisearch:
+    container_name: meilisearch
+    image: getmeili/meilisearch
+    restart: unless-stopped
+    environment:
+      - MEILI_MASTER_KEY=
+      - MEILI_NO_ANALYTICS=true
+      - MEILI_DB_PATH=/data.ms
+    expose:
+      - 7700
+    volumes:
+      - meili-data:/data.ms
+    networks:
+      - database
+
+  memcached:
+    image: memcached:alpine
+    container_name: memcached
+    deploy:
+      resources:
+        limits:
+          memory: 1g
+    expose:
+      - 11211
+    networks:
+      - database
+
+volumes:
+  postgres-data:
+  meili-data:
+
+networks:
+  database:
+    driver: bridge

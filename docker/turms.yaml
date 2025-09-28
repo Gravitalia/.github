@@ -1,0 +1,29 @@
+services:
+  discovery:
+    image: ghcr.io/turmsapp/discovery:0.1.0
+    container_name: discovery
+    restart: always
+    expose:
+      - 4000
+    #volumes:
+    #  - 
+    networks:
+      - database
+
+  turn:
+    image: ghcr.io/turmsapp/turn:0.1.0
+    container_name: turn
+    restart: always
+    expose:
+      - 3478
+      - 3478/udp
+    #volumes:
+    #  - 
+    environment:
+      - PORT=3478
+      - REALM=turn
+      - JWT_ALGORITHM=ES256
+      - JWT_PUBLIC_KEY=/bin/jwt.pub
+      - OTEL_URL=otel-collector:4317
+    networks:
+      - telemetry

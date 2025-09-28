@@ -1,0 +1,45 @@
+services:
+  autha:
+    image: ghcr.io/gravitalia/autha
+    platform: linux/amd64
+    container_name: autha
+    restart: always
+    depends_on:
+      - postgres
+      - otel-collector
+    expose:
+      - 8080
+    environment:
+      - PORT=8080
+      - KEY=260eb1a061cb61898f01fe7dd14bbe94b65541c72d611a98e63811132d528a10 # random 32 bytes in hex
+      - OTEL_URL=otel-collector:4317
+    volumes:
+      - ../config/autha.yaml:/config.yaml
+    networks:
+      - proxy
+      - authentification
+      - database
+      - telemetry
+
+  #openldap:
+  #  image: bitnami/openldap:latest
+  #  container_name: openldap
+  #  expose:
+  #    - 389
+  #  environment:
+  #    - LDAP_ROOT=dc=domain,dc=local
+  #    - LDAP_ADMIN_USERNAME=admin
+  #    - LDAP_ADMIN_PASSWORD=admin
+  #    - LDAP_EXTRA_SCHEMAS=argon2
+  #  volumes:
+  #    - openldap-data:/bitnami/openldap
+  #    - ../config/argon2.ldif:/opt/bitnami/openldap/etc/schema/argon2.ldif
+  #  networks:
+  #    - authentification
+
+volumes:
+  openldap-data:
+
+networks:
+  authentification:
+    driver: bridge

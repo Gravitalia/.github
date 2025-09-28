@@ -1,0 +1,14 @@
+Container (OCI) for Gravitalia
+------------------------------
+
+This directory contains all the files needed to fully deploy Gravitalia with
+tools supporting the Compose specification (especially docker-compose).
+
+It includes:
+  * Account manager (Autha),
+  * Gravitalia News,
+  * Gravitalia Turms (discovery, STUN...),
+  * Databases (postgres),
+  * Telemetry (OTLP, Jaeger...)
+  * Proxy (Nginx),
+  * Tunnel (cloudflared).

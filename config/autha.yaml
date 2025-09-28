@@ -1,0 +1,19 @@
+name: Autha
+address: https://auth.gravitalia.com
+favicon: https://account.gravitalia.com/favicon.webp
+terms_of_service: https://policies.gravitalia.com/terms
+privacy_policy: https://policies.gravitalia.com/privacy
+invite_only: false
+
+postgres:
+  address: postgres:5432
+  database: autha
+  username: postgres
+  password: postgres
+  ssl: false
+
+totp:
+  issuer: autha
+  algorithm: sha1
+  digits: 6
+  period: 30 # in seconds

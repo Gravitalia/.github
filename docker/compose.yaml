@@ -1,0 +1,10 @@
+name: gravitalia
+
+include:
+  - path: cloudflared.yaml
+  - path: proxy.yaml
+  - path: account.yaml
+  - path: news.yaml
+  - path: turms.yaml
+  - path: database.yaml
+  - path: telemetry.yaml
