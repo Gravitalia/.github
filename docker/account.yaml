@@ -11,7 +11,7 @@ services:
       - 8080
     environment:
       - PORT=8080
-      - KEY=260eb1a061cb61898f01fe7dd14bbe94b65541c72d611a98e63811132d528a10 # random 32 bytes in hex
+      - KEY= # key: random 32 bytes encoded in hex
       - OTEL_URL=otel-collector:4317
     volumes:
       - ../config/autha.yaml:/config.yaml

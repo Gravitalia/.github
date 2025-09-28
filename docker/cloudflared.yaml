@@ -5,6 +5,6 @@ services:
     restart: always
     command: tunnel run
     environment:
-      - TUNNEL_TOKEN=eyJhIjoiYjJjMzY0ZTYxMGE5YTViYWFmMjIyMmM3NjI5OGE3ZDQiLCJ0IjoiMTMwZDZiOTUtYzQxZS00YTJkLWI4OWUtYWMyY2JkMDIzMmY2IiwicyI6IllUTTFZbUUzTW1FdE5ETXhPQzAwTWpVeExUZzFOall0WlRCak1ERXlaRGN5TlRSbCJ9
+      - TUNNEL_TOKEN= #key
     networks:
       - proxy

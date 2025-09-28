@@ -19,7 +19,7 @@ services:
     image: getmeili/meilisearch
     restart: unless-stopped
     environment:
-      - MEILI_MASTER_KEY=
+      - MEILI_MASTER_KEY= #key
       - MEILI_NO_ANALYTICS=true
       - MEILI_DB_PATH=/data.ms
     expose:
