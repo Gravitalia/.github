@@ -15,10 +15,7 @@ The projects are divided among several organizations:
   * [RicoqOS](https://github.com/RicoqOS), in-dev microkernel.
   * [Mrs. Watanabe](https://github.com/Mrs-Watanabe), financial analysis and trading tools.
 
-Deployment
-----------
-
-1. Using Docker: `cd docker && docker-compose up -d`
+See [deployment](https://github.com/Gravitalia/.github) guide.
 
 Licenses
 --------
