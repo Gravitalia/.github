@@ -14,6 +14,8 @@ services:
     image: ghcr.io/turmsapp/turn:0.1.1
     container_name: turn
     restart: always
+    depends_on:
+      - otel-collector
     expose:
       - 3478
       - 3478/udp
