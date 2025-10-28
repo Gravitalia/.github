@@ -16,10 +16,8 @@ services:
     container_name: machine_learning
     image: ghcr.io/gravitalia/news-ml:0.1.0
     restart: always
-    environment:
-      - PORT=8000
     expose:
-      - 8000
+      - 9001
     networks:
       - news
 

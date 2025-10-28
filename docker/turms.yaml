@@ -3,10 +3,16 @@ services:
     image: ghcr.io/turmsapp/discovery:0.1.0
     container_name: discovery
     restart: always
+    depends_on:
+      - postgres
     expose:
       - 4000
-    #volumes:
-    #  - 
+    environment:
+      DATABASE_URL: ecto://postgres:postgres@postgres:5432/turms
+      SECRET_KEY_BASE: # mix phx.gen.secret
+      POOL_SIZE: 15
+      PHX_HOST: localhost
+      PORT: 4000
     networks:
       - database
 
