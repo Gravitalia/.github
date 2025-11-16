@@ -1,8 +1,8 @@
 services:
   tunnel:
     container_name: cloudflared
+    restart: unless-stopped
     image: cloudflare/cloudflared
-    restart: always
     command: tunnel run
     environment:
       - TUNNEL_TOKEN= #key

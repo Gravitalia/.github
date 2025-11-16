@@ -1,6 +1,7 @@
 services:
   grafana:
     image: grafana/grafana:latest
+    restart: unless-stopped
     container_name: grafana
     depends_on:
       - prometheus
@@ -10,24 +11,26 @@ services:
       - 3000
     volumes:
       - grafana-data:/var/lib/grafana
-      - ./data/grafana/conf:/etc/grafana/provisioning/datasources
+      - grafana-conf:/etc/grafana/provisioning/datasources
     networks:
       - telemetry
 
   prometheus:
     image: prom/prometheus:v3.6.0
+    restart: unless-stopped
     container_name: prometheus
     command: --config.file=/etc/prometheus/prometheus.yaml
     expose:
       - 9090
     volumes:
-      - ../config/prometheus.yaml:/etc/prometheus/prometheus.yaml
+      - ../config/telemetry/prometheus.yaml:/etc/prometheus/prometheus.yaml
       - prometheus-data:/prometheus
     networks:
       - telemetry
 
   loki:
     image: grafana/loki:3.5
+    restart: unless-stopped
     container_name: loki
     command: -config.file=/etc/loki/local-config.yaml
     depends_on:
@@ -35,23 +38,25 @@ services:
     expose:
       - 3100
     volumes:
-      - ../config/loki.yaml:/etc/loki/local-config.yaml
+      - ../config/telemetry/loki.yaml:/etc/loki/local-config.yaml
       - loki-data:/loki
     networks:
       - telemetry
 
   promtail:
     image: grafana/promtail:3.5
+    restart: unless-stopped
     container_name: promtail
     command: -config.file=/etc/promtail/config.yaml
     volumes:
       - /var/log:/var/log
-      - ../config/promtail.yaml:/etc/promtail/config.yaml
+      - ../config/telemetry/promtail.yaml:/etc/promtail/config.yaml
     networks:
       - telemetry
 
   jaeger:
     image: jaegertracing/all-in-one:1.73.0
+    restart: unless-stopped
     container_name: jaeger
     environment:
       - COLLECTOR_ZIPKIN_HOST_PORT=:9411
@@ -66,8 +71,8 @@ services:
 
   otel-collector:
     image: otel/opentelemetry-collector:0.136.0
+    restart: unless-stopped
     container_name: otel
-    restart: always
     command: --config=/etc/otel-collector-config.yaml
     depends_on:
       - jaeger
@@ -81,11 +86,12 @@ services:
       - 4317
       - 55679
     volumes:
-      - ../config/otel.yaml:/etc/otel-collector-config.yaml
+      - ../config/telemetry/otel.yaml:/etc/otel-collector-config.yaml
     networks:
       - telemetry
 
 volumes:
+  grafana-conf:
   grafana-data:
   prometheus-data:
   loki-data:

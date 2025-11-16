@@ -1,16 +1,16 @@
 services:
   discovery:
-    image: ghcr.io/turmsapp/discovery:0.1.0
+    image: ghcr.io/turmsapp/discovery:0.1.1
+    restart: unless-stopped
     container_name: discovery
-    restart: always
     depends_on:
       - postgres
     expose:
       - 4000
     environment:
       DATABASE_URL: ecto://postgres:postgres@postgres:5432/turms
-      SECRET_KEY_BASE: # mix phx.gen.secret
-      POOL_SIZE: 15
+      SECRET_KEY_BASE: CrAn8gh2NDn4Ulv0YlrhNrxUzb3PMUcXMZQNjd5UZQZ83q/nJmwmLem0g6njGaLF # mix phx.gen.secret
+      POOL_SIZE: 5
       PHX_HOST: localhost
       PORT: 4000
     networks:
@@ -18,18 +18,22 @@ services:
 
   turn:
     image: ghcr.io/turmsapp/turn:0.1.1
+    restart: unless-stopped
     container_name: turn
-    restart: always
     depends_on:
       - otel-collector
     expose:
       - 3478
       - 3478/udp
     environment:
-      - PORT=3478
-      - REALM=turn
-      - JWT_ALGORITHM=ES256
-      - JWT_PUBLIC_KEY=/bin/jwt.pub
-      - OTEL_URL=otel-collector:4317
+      PORT: 3478
+      REALM: turn
+      JWT_ALGORITHM: ES256
+      JWT_PUBLIC_KEY: |-
+        -----BEGIN PUBLIC KEY-----
+        MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE5Ch5+mGfndJIney2+6g7+lbsNMeM
+        O9gYi13U3ipzRa13jlButZX+ww32GV5tJnL9RqH+RMQN4UZA0qStZNScoQ==
+        -----END PUBLIC KEY-----
+      OTEL_URL: otel-collector:4317
     networks:
       - telemetry

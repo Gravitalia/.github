@@ -2,8 +2,8 @@ services:
   autha:
     image: ghcr.io/gravitalia/autha
     platform: linux/amd64
+    restart: unless-stopped
     container_name: autha
-    restart: always
     depends_on:
       - postgres
       - otel-collector
@@ -11,10 +11,10 @@ services:
       - 8080
     environment:
       - PORT=8080
-      - KEY= # key: random 32 bytes encoded in hex
+      - KEY=a448833a8477eda6b395c24f44eda52b306bc739c5752ce30fea84a85c529c21 # key: random 32 bytes encoded in hex
       - OTEL_URL=otel-collector:4317
     volumes:
-      - ../config/autha.yaml:/config.yaml
+      - ../config/account/config.yaml:/config.yaml
     networks:
       - proxy
       - authentification

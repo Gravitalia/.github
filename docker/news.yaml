@@ -1,8 +1,8 @@
 services:
   graphql:
     container_name: news
+    restart: unless-stopped
     image: ghcr.io/gravitalia/news-api:1.0.0
-    restart: always
     environment:
       - PORT=5400
     expose:
@@ -12,14 +12,6 @@ services:
       - database
       - news
 
-  machine_learning:
-    container_name: machine_learning
-    image: ghcr.io/gravitalia/news-ml:0.1.0
-    restart: always
-    expose:
-      - 9001
-    networks:
-      - news
 
 networks:
   news:
