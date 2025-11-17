@@ -1,10 +1,11 @@
 services:
   discovery:
-    image: ghcr.io/turmsapp/discovery:0.1.1
+    image: ghcr.io/turmsapp/discovery:0.1.2
     restart: unless-stopped
     container_name: discovery
     depends_on:
       - postgres
+    command: ["/app/bin/discovery", "start", "-noinput"]
     expose:
       - 4000
     environment:
@@ -15,6 +16,7 @@ services:
       PORT: 4000
     networks:
       - database
+      - proxy
 
   turn:
     image: ghcr.io/turmsapp/turn:0.1.1
