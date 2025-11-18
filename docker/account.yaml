@@ -1,7 +1,6 @@
 services:
   autha:
-    image: ghcr.io/gravitalia/autha
-    platform: linux/amd64
+    image: ghcr.io/gravitalia/autha:0.3.3
     restart: unless-stopped
     container_name: autha
     depends_on:
