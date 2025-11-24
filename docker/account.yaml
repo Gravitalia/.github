@@ -1,6 +1,6 @@
 services:
   autha:
-    image: ghcr.io/gravitalia/autha:0.3.3
+    image: ghcr.io/gravitalia/autha:0.3.4
     restart: unless-stopped
     container_name: autha
     depends_on:
@@ -18,7 +18,21 @@ services:
       - proxy
       - authentification
       - database
+      - broker
       - telemetry
+
+  mail:
+    image: ghcr.io/gravitalia/maily:0.1.0
+    container_name: mail
+    restart: unless-stopped
+    environment:
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USER: user
+      RABBITMQ_PASSWORD: password
+      SMTP2GO_KEY: api-XXX
+    networks:
+      - broker
 
   #openldap:
   #  image: bitnami/openldap:latest

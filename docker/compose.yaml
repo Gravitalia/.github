@@ -7,4 +7,5 @@ include:
   - path: news.yaml
   - path: turms.yaml
   - path: database.yaml
+  - path: broker.yaml
   - path: telemetry.yaml

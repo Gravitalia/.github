@@ -3,6 +3,10 @@ services:
     container_name: nginx
     restart: unless-stopped
     image: nginx:1
+    depends_on:
+      - autha
+      - discovery
+      - graphql
     expose:
       - 80
     volumes:

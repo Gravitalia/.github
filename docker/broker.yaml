@@ -1,0 +1,23 @@
+services:
+  rabbitmq:
+    image: rabbitmq:4.2-alpine
+    container_name: rabbitmq
+    restart: unless-stopped
+    expose:
+      - 5672
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+    volumes:
+      - rabbitmq-lib:/var/lib/rabbitmq/
+      - rabbitmq-log:/var/log/rabbitmq
+    networks:
+      - broker
+
+volumes:
+  rabbitmq-lib:
+  rabbitmq-log:
+
+networks:
+  broker:
+    driver: bridge
