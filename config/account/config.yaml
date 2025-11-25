@@ -1,6 +1,7 @@
 name: Gravitalia
 url: https://auth.gravitalia.com
 favicon: https://account.gravitalia.com/favicon.webp
+background: https://account.gravitalia.com/background.svg
 terms_of_service: https://account.gravitalia.com/terms.pdf
 privacy_policy: https://account.gravitalia.com/privacy.pdf
 invite_only: false
@@ -12,7 +13,16 @@ postgres:
   username: postgres
   password: postgres
   pool_size: 25
-  ssl: false
+  tls: false
+
+# Email sender.
+mail:
+  address: amqp://rabbitmq:5672
+  vhost: /
+  username: user
+  password: password
+  queue: email
+  tls: false
 
 # Password hasher.
 argon2:

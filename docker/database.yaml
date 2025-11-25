@@ -2,7 +2,7 @@ services:
   postgres:
     image: postgres:18.1
     container_name: postgres
-    restart: always
+    restart: unless-stopped
     expose:
       - 5432
     environment:
@@ -19,7 +19,7 @@ services:
     image: getmeili/meilisearch
     restart: unless-stopped
     environment:
-      - MEILI_MASTER_KEY= #key
+      - MEILI_MASTER_KEY=master_key
       - MEILI_NO_ANALYTICS=true
       - MEILI_DB_PATH=/data.ms
     expose:

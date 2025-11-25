@@ -1,10 +1,16 @@
 services:
   rabbitmq:
     image: rabbitmq:4.2-alpine
-    container_name: rabbitmq
     restart: unless-stopped
-    expose:
-      - 5672
+    container_name: rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_running"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    ports:
+      - 5672:5672
     environment:
       RABBITMQ_DEFAULT_USER: user
       RABBITMQ_DEFAULT_PASS: password
