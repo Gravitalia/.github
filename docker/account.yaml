@@ -1,6 +1,6 @@
 services:
   autha:
-    image: ghcr.io/gravitalia/autha:0.3.4
+    image: ghcr.io/gravitalia/autha:0.4.2
     restart: unless-stopped
     container_name: autha
     depends_on:
@@ -14,7 +14,8 @@ services:
       - 8080
     environment:
       - PORT=8080
-      - KEY=a448833a8477eda6b395c24f44eda52b306bc739c5752ce30fea84a85c529c21 # key: random 32 bytes encoded in hex
+      - KEY=master_key # key is derived with Argon2.
+      - SALT=3f7911bbb6d63436367162069fc6b45c # n-byte hex. MUST be high entropy.
       - OTEL_URL=otel-collector:4317
     volumes:
       - ../config/account/config.yaml:/config.yaml
@@ -26,7 +27,7 @@ services:
       - telemetry
 
   mail:
-    image: ghcr.io/gravitalia/maily:0.1.0
+    image: ghcr.io/gravitalia/maily:0.1.1
     restart: unless-stopped
     container_name: mail
     depends_on:
