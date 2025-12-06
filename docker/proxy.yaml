@@ -1,8 +1,8 @@
 services:
   nginx:
+    image: nginx:1
     container_name: nginx
     restart: unless-stopped
-    image: nginx:1
     depends_on:
       - autha
       - discovery
@@ -12,6 +12,7 @@ services:
     volumes:
       - ../config/proxy/nginx.conf:/etc/nginx/nginx.conf
       - ../config/proxy/cloudflare-ips.conf:/etc/nginx/cloudflare-ips.conf
+      - autha_socket:/var/run/sockets
     networks:
       - proxy
 
