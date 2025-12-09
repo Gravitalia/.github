@@ -15,7 +15,7 @@ The projects are divided among several organizations:
   * [RicoqOS](https://github.com/RicoqOS), in-dev microkernel.
   * [Mrs. Watanabe](https://github.com/Mrs-Watanabe), financial analysis and trading tools.
 
-See [deployment](https://github.com/Gravitalia/.github) guide.
+See [deployment](https://github.com/Gravitalia/infra) guide.
 
 Licenses
 --------

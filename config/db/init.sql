@@ -1,2 +1,0 @@
-CREATE DATABASE autha;
-CREATE DATABASE turms;

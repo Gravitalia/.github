@@ -1,4 +1,0 @@
-Deployment
-----------
-
-1. Using Docker: `cd docker && docker-compose up -d`
