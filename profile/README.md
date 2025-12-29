@@ -12,10 +12,11 @@ Projects
 The projects are divided among several organizations:
   * [Turms](https://github.com/TurmsApp), peer-to-peer chat service.
   * [Lubmminy](https://github.com/Lubmminy), web-related tools.
-  * [RicoqOS](https://github.com/RicoqOS), in-dev microkernel.
+  * [RicoqOS](https://github.com/RicoqOS), experimental seL4-like microkernel.
   * [Mrs. Watanabe](https://github.com/Mrs-Watanabe), financial analysis and trading tools.
 
-See [deployment](https://github.com/Gravitalia/infra) guide.
+Check out [deployment](https://github.com/Gravitalia/infra) guide.
+Take a look at the [architecture](https://github.com/Gravitalia/.github/blob/master/architecture.md).
 
 Licenses
 --------
